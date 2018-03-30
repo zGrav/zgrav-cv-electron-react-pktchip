@@ -1,0 +1,235 @@
+/*
+ * Global constants goes here
+ */
+:root {
+    --primary-color: #42b983;
+}
+
+
+/*
+ * Global CSS goes here, it requires to use :global before each style
+ */
+
+body {
+    display: flex;
+    overflow: hidden;
+    margin: auto;
+}
+#app {
+    max-width: 480px;
+    font-family: Source Sans Pro, Helvetica, sans-serif;
+}
+
+/* content 0 */
+
+.wrapper {
+  height: 100%;
+  width: 100%;
+  left:0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+  background-size: 1800% 1800%;
+
+  -webkit-animation: rainbow 5s ease infinite;
+  -z-animation: rainbow 5s ease infinite;
+  -o-animation: rainbow 5s ease infinite;
+  animation: rainbow 5s ease infinite;
+}
+
+@-webkit-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-moz-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-o-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+
+.mainText {
+  font-family: 'Righteous', cursive;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* content 1 */
+
+.breathingSince {
+  font-family: 'Press Start 2P', cursive;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* content 2 */
+.leftSideContainer {
+  float:left;
+  width: 200px;
+}
+
+.meImg {
+  max-width: 50%;
+  height: auto;
+
+  -webkit-animation: fadein 2s;
+  -moz-animation: fadein 2s;
+  -ms-animation: fadein 2s;
+  -o-animation: fadein 2s;
+  animation: fadein 2s;
+}
+
+.meText {
+  font-family: 'Audiowide', cursive;
+
+  -webkit-animation: fadein 2s;
+  -moz-animation: fadein 2s;
+  -ms-animation: fadein 2s;
+  -o-animation: fadein 2s;
+  animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.rightSideContainer {
+  float: center;
+}
+
+/* content 3 */
+
+.contactText {
+  font-family: 'VT323', monospace;
+}
+
+/* content 4 */
+
+.finalThoughtsText {
+  font-family: 'Electrolize', sans-serif;
+}
+
+/* content -1 */
+
+@keyframes flyin {
+  from {
+    transform: translateY(-250px);
+  }
+  to {
+    transform: rotateX(12deg);
+  }
+}
+@keyframes lightwall {
+  0% {
+    opacity: 0;
+    width: 0;
+  }
+  5%, 50% {
+    opacity: 1;
+    width: 100%;
+  }
+  100% {
+    opacity: 0;
+    width: 100%;
+  }
+}
+
+.trongrid {
+  background: black;
+  height: 270px;
+  perspective: 100;
+  width: 480px;
+}
+
+.tron {
+  background-color: black;
+  background-image: linear-gradient(0deg, transparent 0px, #01D5DA 2px, transparent 4px), linear-gradient(90deg, transparent 0px, #f66a35 2px, transparent 4px);
+  background-size: 64px 64px;
+  height: 100%;
+  perspective: 100;
+  position: relative;
+  transform-origin: center top;
+  animation: flyin 1600ms ease-in-out 300ms forwards;
+}
+
+.tron:before,
+.tron:after {
+  content: "";
+  display: block;
+  position: absolute;
+  background: #01D5DA;
+  height: 50px;
+  width: 200px;
+  transform: rotateX(-10deg);
+  opacity: 0;
+  top: 32px;
+  box-shadow: 0 -5px 15px #01D5DA;
+  animation: lightwall 3s ease-in 2000ms forwards;
+}
+
+.tron:after {
+  right: 0;
+  height: 50px;
+  top: 200px;
+  background: #f66a35;
+  box-shadow: 0 -10px 50px 2px #f66a35;
+  animation: lightwall 3s ease-in 3200ms;
+}
+
+.welcome {
+    -webkit-animation: hideText 1.7s forwards;
+    animation: hideText 1.7s forwards;
+    z-index: 9999;
+    position: absolute;
+    color: white;
+    font-family: 'Monoton', cursive;
+    font-size: x-large;
+    top: 45%;
+    left: 15%;
+}
+
+@keyframes hideText {
+    0%   {opacity: 1;}
+    90%  {opacity: 1;}
+    100% {opacity: 0;}
+}
+@-webkit-keyframes hideText {
+    0%   {opacity: 1;}
+    90%  {opacity: 1;}
+    100% {opacity: 0;}
+}
