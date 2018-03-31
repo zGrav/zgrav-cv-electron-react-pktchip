@@ -1,59 +1,40 @@
 // Basic init
-const electron = require('electron')
-const {app, BrowserWindow} = electron
-
-const sudo = require('sudo-prompt');
-const sudoOptions = {
-  name: 'Electron',
-};
+const electron = require('electron');
+const {app, BrowserWindow} = electron;
 
 const PKTCHIP_KRNL = '4.4.13-ntc-mlc';
-const PKTCHIP_ARCH = 'armv7l';
+const PKTCHIP_ARCH = 'arm';
 
-const exec = require('child_process').exec;
-let arch;
-let krnl;
+const os = require('os');
 
-exec('uname -m', function (error, stdout, stderr) {
-  if (error) throw error;
-  arch = stdout;
-});
-
-exec('uname -r', function (error, stdout, stderr) {
-  if (error) throw error;
-  krnl = stdout;
-});
+const { exec } = require('child_process');
 
 // Let electron reloads by itself when webpack watches changes in ./app/
-require('electron-reload')(__dirname)
+require('electron-reload')(__dirname);
 
 // To avoid being garbage collected
-let mainWindow
+let mainWindow;
 
 app.on('ready', () => {
-    if (arch === PKTCHIP_ARCH && krnl === PKTCHIP_KRNL) {
-      sudo.exec('echo heartbeat | tee /sys/class/leds/chip\:white\:status/trigger > /dev/null', sudoOptions,
-        function(error, stdout, stderr) {
-          if (error) throw error;
-          console.log('stdout: ' + stdout);
-        }
-      );
+    if (os.arch() === PKTCHIP_ARCH && os.release() === PKTCHIP_KRNL) {
+      exec('echo heartbeat | tee /sys/class/leds/chip\:white\:status/trigger > /dev/null', (err, stdout, stderr) => {
+        if (err) throw err;
+      });
     }
 
-    mainWindow = new BrowserWindow({width: 480, height: 272})
+    mainWindow = new BrowserWindow({width: 480, height: 272});
 
-    mainWindow.loadURL(`file://${__dirname}/app/index.html`)
+    mainWindow.setFullScreen(true);
+
+    mainWindow.loadURL(`file://${__dirname}/app/index.html`);
 
 })
 
 app.on('before-quit',function()
 {
-  if (arch === PKTCHIP_ARCH && krnl === PKTCHIP_KRNL) {
-    sudo.exec('echo none | tee /sys/class/leds/chip\:white\:status/trigger > /dev/null', sudoOptions,
-      function(error, stdout, stderr) {
-        if (error) throw error;
-        console.log('stdout: ' + stdout);
-      }
-    );
+  if (os.arch() === PKTCHIP_ARCH && os.release() === PKTCHIP_KRNL) {
+    exec('echo none | tee /sys/class/leds/chip\:white\:status/trigger > /dev/null', (err, stdout, stderr) => {
+      if (err) throw err;
+    });
   }
 })
